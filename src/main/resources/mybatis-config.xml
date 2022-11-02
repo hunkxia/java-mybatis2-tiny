@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 注意顺序，否则报错：The content of element type "configuration" must match "(properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?)". -->
+<!-- 具体标签使用请参考：https://mybatis.net.cn/configuration.html -->
+<configuration>
+    <!-- 引入配置文件，或者子元素中设置 -->
+    <properties resource="jdbc.properties" />
+    <!-- 配置信息 -->
+    <settings>
+        <!-- 打印查询日志 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+    <!-- 类型别名 -->
+    <typeAliases>
+        <typeAlias alias="User" type="tiny.mybatis2.models.User" />
+    </typeAliases>
+    <!-- 配置环境，可以支持多种不同的工作模式 -->
+    <environments default="development">
+        <!-- 配置开发环境 -->
+        <environment id="development">
+            <!-- 配置事务类型 -->
+            <transactionManager type="JDBC"/>
+            <!-- 配置数据源，三种内建数据源：UNPOOLED、POOLED、JNDI -->
+            <dataSource type="POOLED">
+                <!-- 连接数据库的属性 -->
+                <property name="driver" value="${jdbc.driverClass}"/>
+                <property name="url" value="${jdbc.connectionURL}"/>
+                <property name="username" value="${jdbc.userId}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 配置映射文件 -->
+    <mappers>
+        <mapper resource="tiny.mybatis2.mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tiny.mybatis2.mapper.IUserMapper">
+    <select id="findAll" resultType="tiny.mybatis2.models.User">
+        select * from g2_user
+    </select>
+    <select id="findOne" resultType="tiny.mybatis2.models.User" parameterType="string">
+        select * from g2_user where uid = #{uid}
+    </select>
+</mapper>
